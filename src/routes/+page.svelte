@@ -1,5 +1,16 @@
 <script lang="ts">
+    import "iapau-components/iapau-card";
+    import "iapau-components/iapau-textarea";
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+
+
+<div class="column-center">
+
+
+    <iapau-card>
+        <h1>Connectez-vous : </h1>
+        <iapau-textarea placeholder ="E-mail :"> </iapau-textarea>
+        <iapau-textarea placeholder="Mot de passe"></iapau-textarea>
+    </iapau-card>
+</div>

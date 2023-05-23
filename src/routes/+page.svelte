@@ -10,13 +10,13 @@
     <iapau-card class="column-center card">
         <img src="img/iapau_round.png" alt="logo"  style="width: 30%"/>
         <p style="font-size: 1.5vw"> Connectez vous </p>
-        <iapau-input type="text" placeholder="E-mail"  style="margin-top:5%"></iapau-input>
-        <iapau-input type="password" style="margin-top:5%"></iapau-input>
+        <iapau-input typeInput="text" placeholder="E-mail"  style="margin-top:5%"></iapau-input>
+        <iapau-input typeInput="password" placeholder="Mot de passe" style="margin-top:5%"></iapau-input>
 
 
-        <div style="display: flex; margin-top:5%">
+        <div style="display: flex; margin-top:5% ">
         <iapau-button mode="primary"  hoverColors="true" style="margin:5%">Connexion</iapau-button>
-        <iapau-button mode="secondary" hoverColors="true" style="margin:5%" >Inscription</iapau-button>
+        <iapau-button mode="secondary" hoverColors="true" style="margin:5%" ><a class="link" href="/inscription">Inscription</a></iapau-button>
         </div>
     </iapau-card>
 

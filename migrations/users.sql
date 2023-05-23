@@ -13,8 +13,3 @@ CREATE TABLE IF NOT EXISTS users (
     id_team UUID,
     FOREIGN KEY (id_team) REFERENCES team (id)
 );
-
-INSERT INTO users (email, surname, name, password, salt, level, study_level, town, school, role) VALUES ('a@a.a', 'a', 'a', 'a', 'a', 1, 'a', 'a', 'a', 'a');
-INSERT INTO users (email, surname, name, password, salt, level, study_level, town, school, role) VALUES ('b@b.b', 'b', 'b', 'b', 'b', 1, 'b', 'b', 'b', 'b');
-INSERT INTO users (email, surname, name, password, salt, level, study_level, town, school, role) VALUES ('c@c.c', 'c', 'c', 'c', 'c', 1, 'c', 'c', 'c', 'c');
-INSERT INTO users (email, surname, name, password, salt, level, study_level, town, school, role) VALUES ('d@d.d', 'd', 'd', 'd', 'd', 1, 'd', 'd', 'd', 'd');

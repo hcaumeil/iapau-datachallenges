@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
-    email TEXT NOT NULL PRIMARY KEY,
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    email TEXT NOT NULL,
     surname TEXT,
     name TEXT,
     password TEXT NOT NULL,

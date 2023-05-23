@@ -1,6 +1,7 @@
 import { Client } from 'pg';
 import {PG_USER,PG_HOST,PG_DATABASE,PG_PASSWORD,PG_PORT} from '$env/static/private';
 import type { RequestHandler } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 const dbConfig = {
   user: PG_USER,
@@ -24,9 +25,9 @@ export const POST: RequestHandler = async ({ request }) => {
         valid: true,
       }));
     }
-    return new Response(JSON.stringify({
-      valid: false,
-    }));
+    throw error(401, {
+      message: 'Wrong login or password'
+    });
     
   } catch (error) {
     console.error('Error fetching user table:', error);

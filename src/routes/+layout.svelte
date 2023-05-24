@@ -3,8 +3,9 @@
   import {page} from "$app/stores";
 
   const pages = [
-      ["Accueil", "/"],
+      ["Accueil", "/acceuil"],
       ["Inscription", "/inscription"],
+      ["Settings", "/settings"],
   ];
 
   let current_page: string;

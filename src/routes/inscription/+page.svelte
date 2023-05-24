@@ -10,26 +10,6 @@
 
 </script>
 
-<!-- test nev bar -->
-<div class="navbar">
-    <iapau-elementnavbar src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" style="margin: 5%" showMenu={showMenu}>
-        Test
-    </iapau-elementnavbar>
-
-    <iapau-elementnavbar src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png"  showMenu={showMenu} style="margin: 5%" >
-        Test
-    </iapau-elementnavbar>
-
-
-    <iapau-elementnavbar src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" style="margin: 5%">
-        Test
-    </iapau-elementnavbar>
-
-
-
-</div>
-
-
 
 <div class="column-center" style="height: 100%">
     <iapau-card class="column-center card">
@@ -43,7 +23,7 @@
             <iapau-input typeInput="text" placeholder="Ecole" style="margin:5%"></iapau-input>
         </form>
 
-        <iapau-button mode="primary" hoverColors="true" style="margin:5%">Continuer</iapau-button>
+        <iapau-button mode="primary" hoverColors="true" style="margin:5%"><a class="link" href="/acceuil">Continuer</a></iapau-button>
     </iapau-card>
 
     <script>
@@ -66,12 +46,5 @@
         padding: 2% 15%;
     }
 
-    .navbar{
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: grey;
-        padding: 2.5%;
-    }
 
 </style>

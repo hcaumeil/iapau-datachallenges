@@ -15,7 +15,7 @@
 
 
         <div style="display: flex; margin-top:5% ">
-        <iapau-button mode="primary"  hoverColors="true" style="margin:5%">Connexion</iapau-button>
+        <iapau-button mode="primary"  hoverColors="true" style="margin:5%"><a class="link" href="/acceuil">Connexion</a></iapau-button>
         <iapau-button mode="secondary" hoverColors="true" style="margin:5%" ><a class="link" href="/inscription">Inscription</a></iapau-button>
         </div>
     </iapau-card>

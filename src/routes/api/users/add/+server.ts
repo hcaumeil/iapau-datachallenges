@@ -16,17 +16,17 @@ const client = new Client(dbConfig);
 export const POST: RequestHandler = async ({ request }) => {
   try {
     await client.connect();
-    const { password,login } = await request.json();
+    const { email,surname,name,password,study_level,town,school,role,id_team } = await request.json();
 
-    const result = await client.query("SELECT * FROM users Where password = '"+password+"' and email = '"+login+"';");
+    const result = await client.query("INSERT INTO users (email,surname,name,password,salt,level,study_level,town,school,role) VALUES('"+email+"','"+surname+"','"+name+"','"+password+"','sel',0,'"+study_level+"','"+town+"','"+school+"','"+role+"');");
 
     if(result.rowCount>0){
       return new Response(JSON.stringify({
-        valid: true,
+        message: "Utilisateur créé",
       }));
     }
     throw error(401, {
-      message: 'Wrong login or password'
+      message: 'Informations not valid'
     });
     
   } catch (error) {

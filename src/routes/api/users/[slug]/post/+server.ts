@@ -13,20 +13,27 @@ const dbConfig = {
 
 const client = new Client(dbConfig);
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request,params }) => {
   try {
     await client.connect();
-    const { password,login } = await request.json();
-
-    const result = await client.query("SELECT * FROM users Where password = '"+password+"' and email = '"+login+"';");
+    
+    const data = await request.json();
+    let query = "UPDATE users Set ";
+    Object.entries(data).forEach(([key, value]) => {
+        query = query.concat(key+"='"+value+"',");
+    });
+    query = query.slice(0, -1);
+    query = query.concat("WHERE id = '"+params.slug+"';" );
+    console.log(query);
+    const result = await client.query(query);
 
     if(result.rowCount>0){
       return new Response(JSON.stringify({
-        valid: true,
+        message: "Utilisateur modifié",
       }));
     }
     throw error(401, {
-      message: 'Wrong login or password'
+      message: 'Informations not valid'
     });
     
   } catch (error) {

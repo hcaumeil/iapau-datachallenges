@@ -1,5 +1,15 @@
 <script lang="ts">
   import "iapau-components/css/default-theme.css";
+  import {page} from "$app/stores";
+
+  const pages = [
+      ["Accueil", "/"],
+      ["Inscription", "/inscription"],
+  ];
+
+  let current_page: string;
+  $: current_page = $page.url.pathname;
+
 </script>
 
 <slot />
@@ -22,6 +32,13 @@
     justify-content: center;
     align-items: center;
   }
+
+  :global(.link) {
+      text-decoration: none;
+      text-decoration-skip-ink: auto;
+      color:inherit;
+  }
+
 
   @font-face {
     font-family: "Montserrat";

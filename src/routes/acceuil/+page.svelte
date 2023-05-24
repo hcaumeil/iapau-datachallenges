@@ -14,7 +14,6 @@
     }
 
 
-
 </script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -22,7 +21,7 @@
 <!-- test nev bar -->
 <div class="navbar">
 
-    <span onclick="toggleShowMenu" class="material-symbols-outlined">menu</span>
+    <span on:click={toggleShowMenu}  class="material-symbols-outlined" style="cursor: pointer ">menu</span>
 
     <div style="margin-top: 15%">
 

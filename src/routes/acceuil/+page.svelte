@@ -6,13 +6,13 @@
     import "iapau-components/iapau-elementnavbar";
     import "iapau-components/iapau-link";
 
-    let showMenu = false;
+    let showMenu = true;
 
-    /*
+
     function toggleShowMenu() {
         showMenu = !showMenu
     }
-    */
+
 
 
 </script>
@@ -26,16 +26,16 @@
 
     <div style="margin-top: 15%">
 
-    <iapau-elementnavbar showMenu src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" style="margin: 5%" >
+    <iapau-elementnavbar showMenu={showMenu} src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" style="margin: 5%" >
         Test
     </iapau-elementnavbar>
 
-    <iapau-elementnavbar showMenu="false" src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png"  style="margin: 5%">
+    <iapau-elementnavbar showMenu={showMenu} src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png"  style="margin: 5%">
         Test
     </iapau-elementnavbar>
 
 
-    <iapau-elementnavbar  src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" style="margin: 5%">
+    <iapau-elementnavbar showMenu={showMenu} src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png" style="margin: 5%">
         Test
     </iapau-elementnavbar>
 

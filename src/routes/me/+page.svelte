@@ -18,6 +18,9 @@
 
     <span class="material-symbols-outlined" style="cursor: pointer ">menu</span>
 
+    <!-- manque remixicon
+    <img src="remixicon/icons/Business/mail-fill.svg" alt="test"> -->
+
     <div style="margin-top: 15%" class="column-center">
 
 

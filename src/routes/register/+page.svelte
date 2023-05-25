@@ -6,7 +6,7 @@
     import "iapau-components/iapau-elementnavbar";
     import "iapau-components/iapau-link";
 
-    let showMenu = false;
+
 
 </script>
 
@@ -16,14 +16,14 @@
         <p style="font-size: 1.5vw"> Inscription </p>
 
         <form class="column-center card">
-            <iapau-input typeInput="text" placeholder="E-mail" style="margin:5%"></iapau-input>
-            <iapau-input typeInput="password" placeholder="password" style="margin:5%"></iapau-input>
+            <iapau-input name="user" typeInput="text" placeholder="E-mail" style="margin:5%"></iapau-input>
+            <iapau-input name="password" typeInput="password" placeholder="password" style="margin:5%"></iapau-input>
             <iapau-input typeInput="text" placeholder="Pseudo" style="margin:5%"></iapau-input>
             <iapau-select id="mySelect" style="margin:5%"></iapau-select>
             <iapau-input typeInput="text" placeholder="Ecole" style="margin:5%"></iapau-input>
         </form>
 
-        <iapau-button mode="primary" hoverColors="true" style="margin:5%"><a class="link" href="/acceuil">Continuer</a></iapau-button>
+        <iapau-button mode="primary" hoverColors="true" style="margin:5%"><a class="link" href="/me">Continuer</a></iapau-button>
     </iapau-card>
 
     <script>

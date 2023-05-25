@@ -3,8 +3,8 @@
   import {page} from "$app/stores";
 
   const pages = [
-      ["Accueil", "/acceuil"],
-      ["Inscription", "/inscription"],
+      ["Accueil", "/me"],
+      ["Register", "/register"],
       ["Settings", "/settings"],
   ];
 
@@ -12,6 +12,7 @@
   $: current_page = $page.url.pathname;
 
 </script>
+
 
 <slot />
 

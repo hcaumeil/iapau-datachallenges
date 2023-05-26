@@ -6,13 +6,6 @@
   let email = "";
   let password = "";
 
-  const handleEmailInput = (event) => {
-    email = event.target.value;
-  };
-
-  const handlePasswordInput = (event) => {
-    password = event.target.value;
-  };
   const handleLogin = async () => {
     const response = await fetch("/api/login", {
       method: "POST",
@@ -61,7 +54,7 @@
       placeholder="Mot de passe"
     />
 
-    <div style="display: flex; margin-top: 2rem; gap: 2rem;">
+    <div style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;">
       <iapau-button on:click={handleLogin} mode="primary" hoverColors="true"
         >Connexion</iapau-button
       >

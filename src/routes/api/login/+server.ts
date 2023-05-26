@@ -30,10 +30,14 @@ export const POST: RequestHandler = async ({ request }) => {
     });
     
   } catch (error) {
-    console.error('Error fetching user table:', error);
-    return  new Response(JSON.stringify({
-        error: 'Internal Server Error',
-      }))
+      throw error(500, {
+        message: 'Internal Server Error'
+      });
+
+    // return  new Response(JSON.stringify({
+    //     error: ,
+    //     code: 500,
+    //   }))
   } finally {
     await client.end();
   }

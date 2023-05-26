@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"iapau-components": "git+git@github.com:hcaumeil/iapau-components.git",
+		"js-sha256": "^0.9.0",
 		"pg": "^8.11.0",
 		"postgres": "^3.3.4",
 		"remixicon": "^3.3.0"

@@ -8,6 +8,8 @@ import {
 } from "$env/static/private";
 import type { RequestHandler } from "@sveltejs/kit";
 import { error, json } from "@sveltejs/kit";
+import { sha256 } from 'js-sha256';
+
 
 const dbConfig = {
   user: PG_USER,
@@ -70,9 +72,10 @@ export const POST: RequestHandler = async ({ request }) => {
         message: 'Email already taken',
       }));
     }
-
+    const sel = generateRandomString(16);
+    const hashed_password = sha256(password);
     const role = "user";
-    const result = await client.query("INSERT INTO users (email,surname,name,password,salt,level,study_level,town,school,role) VALUES('"+email+"','"+surname+"','"+name+"','"+password+"','sel',0,'"+study_level+"','"+town+"','"+school+"','"+role+"');");
+    const result = await client.query("INSERT INTO users (email,surname,name,password,salt,level,study_level,town,school,role) VALUES('"+email+"','"+surname+"','"+name+"','"+hashed_password+"','"+sel+"',0,'"+study_level+"','"+town+"','"+school+"','"+role+"');");
 
     if(result.rowCount>0){
       return new Response(JSON.stringify({
@@ -91,5 +94,17 @@ export const POST: RequestHandler = async ({ request }) => {
   } finally {
     await client.end();
   }
+}
+
+function generateRandomString(length:number) {
+  let result = '';
+  const characters = '*$&é(-è_çà)ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomIndex);
+  }
+
+  return result;
 }
 

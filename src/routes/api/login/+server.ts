@@ -14,18 +14,13 @@ const dbConfig = {
 const client = new Client(dbConfig);
 
 export const POST: RequestHandler = async ({ request }) => {
-  console.log("debut de la fonction POST");
   try {
-    console.log("debut du try");
     await client.connect();
-    console.log("après le await client.connect()");
     const { password,login } = await request.json();
-    console.log("login récupéré : "+login + ", password récupéré : "+password);
 
     const result = await client.query("SELECT password FROM users Where email = '"+login+"';");
 
     if(result.rowCount > 0 && result.rows[0].password == password){
-      console.log("on est dans le if");
       return new Response(JSON.stringify({
         valid: true,
       }));

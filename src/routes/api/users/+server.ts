@@ -41,6 +41,14 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     await client.connect();
     const { email,surname,name,password,study_level,town,school,role } = await request.json();
+    const checkEmailQuery = `SELECT COUNT(*) FROM users WHERE email = '${email}';`;
+    const emailResult = await client.query(checkEmailQuery);
+    const emailCount = emailResult.rows[0].count;
+    if (emailCount > 0) {
+      return new Response(JSON.stringify({
+        message: 'Email already taken',
+      }));
+    }
 
     const result = await client.query("INSERT INTO users (email,surname,name,password,salt,level,study_level,town,school,role) VALUES('"+email+"','"+surname+"','"+name+"','"+password+"','sel',0,'"+study_level+"','"+town+"','"+school+"','"+role+"');");
 
@@ -62,3 +70,4 @@ export const POST: RequestHandler = async ({ request }) => {
     await client.end();
   }
 }
+

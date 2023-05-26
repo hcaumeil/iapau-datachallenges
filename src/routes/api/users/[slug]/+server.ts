@@ -39,6 +39,11 @@ export const POST: RequestHandler = async ({ request,params }) => {
     
     const data = await request.json();
     let query = "UPDATE users Set ";
+    if(!data){
+      throw error(400, {
+        message: 'No attributes to modify'
+      });
+    }
     Object.entries(data).forEach(([key, value]) => {
         query = query.concat(key+"='"+value+"',");
     });

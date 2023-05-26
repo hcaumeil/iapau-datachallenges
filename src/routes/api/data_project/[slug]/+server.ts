@@ -38,6 +38,11 @@ export const POST: RequestHandler = async ({ request,params }) => {
     await client.connect();
     
     const data = await request.json();
+    if(!data){
+      throw error(400, {
+        message: 'No attribute to modify'
+      });
+    }
     let query = "UPDATE data_project Set ";
     Object.entries(data).forEach(([key, value]) => {
         query = query.concat(key+"='"+value+"',");
@@ -64,4 +69,29 @@ export const POST: RequestHandler = async ({ request,params }) => {
   } finally {
     await client.end();
   }
+}
+
+export async function DELETE({params}:any) {
+  try {
+    await client.connect();
+
+    const result = await client.query("DELETE FROM data_project where id='"+params.slug+"';");
+
+    if(result.rowCount>0){
+        return new Response(JSON.stringify({
+          message: "Projet data supprimé",
+        }));
+      }
+      throw error(401, {
+        message: 'Id not valid'
+      });
+      
+    } catch (error) {
+      console.error('Error fetching data_project table:', error);
+      return  new Response(JSON.stringify({
+          error: 'Internal Server Error',
+        }))
+    } finally {
+      await client.end();
+    }
 }

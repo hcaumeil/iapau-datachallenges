@@ -41,7 +41,11 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     await client.connect();
     const { name, description, image, contact, ressources } = await request.json();
-
+    if(!name||!description||!image||!contact||!ressources){
+      throw error(400, {
+        message: 'One or more attribute is undefined'
+      });
+    }
     const result = await client.query("INSERT INTO data_project (name, description, image, contact, ressources) VALUES ($1, $2, $3, $4, $5)", [name, description, image, contact, ressources]);
 
 

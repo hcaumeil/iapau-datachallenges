@@ -17,14 +17,14 @@ export async function GET({params}:any) {
   try {
     await client.connect();
 
-    const result = await client.query("SELECT * FROM users where id='"+params.slug+"';");
-    const users = result.rows;
+    const result = await client.query("SELECT * FROM data_challenge where id='"+params.slug+"';");
+    const data_challenge = result.rows;
 
     return new Response(JSON.stringify({
-        users: users,
+        data_challenge: data_challenge,
       }));
   } catch (error) {
-    console.error('Error fetching user table:', error);
+    console.error('Error fetching data_challenge table:', error);
     return  new Response(JSON.stringify({
         error: 'Internal Server Error',
       }))
@@ -38,9 +38,13 @@ export const POST: RequestHandler = async ({ request,params }) => {
     await client.connect();
     
     const data = await request.json();
-    let query = "UPDATE users Set ";
+    let query = "UPDATE data_challenge Set ";
     Object.entries(data).forEach(([key, value]) => {
+      if(typeof value === 'string' && key.includes("date")){
+        query = query.concat(key+"=TO_DATE('"+value+"','DD-MM-YYYY'),");
+      }else{
         query = query.concat(key+"='"+value+"',");
+      }
     });
     query = query.slice(0, -1);
     query = query.concat("WHERE id = '"+params.slug+"';" );
@@ -48,7 +52,7 @@ export const POST: RequestHandler = async ({ request,params }) => {
 
     if(result.rowCount>0){
       return new Response(JSON.stringify({
-        message: "Utilisateur modifié",
+        message: "Data_challenge modifié",
       }));
     }
     throw error(401, {
@@ -56,7 +60,7 @@ export const POST: RequestHandler = async ({ request,params }) => {
     });
     
   } catch (error) {
-    console.error('Error fetching user table:', error);
+    console.error('Error fetching data_challenge table:', error);
     return  new Response(JSON.stringify({
         error: 'Internal Server Error',
       }))

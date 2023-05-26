@@ -22,7 +22,7 @@ export const GET: RequestHandler = async () => {
   await client.connect();
 
 try {
-  const result = await client.query("SELECT * FROM users");
+  const result = await client.query("SELECT * FROM data_challenge");
   const usersJson = JSON.stringify(result.rows);
 
   return new Response(usersJson);
@@ -40,13 +40,13 @@ try {
 export const POST: RequestHandler = async ({ request }) => {
   try {
     await client.connect();
-    const { email,surname,name,password,study_level,town,school,role } = await request.json();
-
-    const result = await client.query("INSERT INTO users (email,surname,name,password,salt,level,study_level,town,school,role) VALUES('"+email+"','"+surname+"','"+name+"','"+password+"','sel',0,'"+study_level+"','"+town+"','"+school+"','"+role+"');");
+    const { name,begin_date,end_date } = await request.json();
+    console.log("INSERT INTO data_challenge (name,begin_date,end_date) VALUES('"+name+"','TO_DATE('"+begin_date+"', 'DD-MM-YYYY'),TO_DATE('"+end_date+"', 'DD-MM-YYYY'));");
+    const result = await client.query("INSERT INTO data_challenge (name,begin_date,end_date) VALUES('"+name+"',TO_DATE('"+begin_date+"', 'DD-MM-YYYY'),TO_DATE('"+end_date+"', 'DD-MM-YYYY'));");
 
     if(result.rowCount>0){
       return new Response(JSON.stringify({
-        message: "Utilisateur créé",
+        message: "Data challenge créé",
       }));
     }
     throw error(401, {
@@ -54,7 +54,7 @@ export const POST: RequestHandler = async ({ request }) => {
     });
     
   } catch (error) {
-    console.error('Error fetching user table:', error);
+    console.error('Error fetching data_challenge table:', error);
     return  new Response(JSON.stringify({
         error: 'Internal Server Error',
       }))

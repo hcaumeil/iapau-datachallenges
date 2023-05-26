@@ -39,6 +39,11 @@ export const POST: RequestHandler = async ({ request,params }) => {
     
     const data = await request.json();
     let query = "UPDATE users Set ";
+    if(!data){
+      throw error(400, {
+        message: 'No attributes to modify'
+      });
+    }
     Object.entries(data).forEach(([key, value]) => {
         query = query.concat(key+"='"+value+"',");
     });
@@ -63,4 +68,29 @@ export const POST: RequestHandler = async ({ request,params }) => {
   } finally {
     await client.end();
   }
+}
+
+export async function DELETE({params}:any) {
+  try {
+    await client.connect();
+
+    const result = await client.query("DELETE FROM users where id='"+params.slug+"';");
+
+    if(result.rowCount>0){
+        return new Response(JSON.stringify({
+          message: "Utilisateur supprimé",
+        }));
+      }
+      throw error(401, {
+        message: 'Id not valid'
+      });
+      
+    } catch (error) {
+      console.error('Error fetching user table:', error);
+      return  new Response(JSON.stringify({
+          error: 'Internal Server Error',
+        }))
+    } finally {
+      await client.end();
+    }
 }

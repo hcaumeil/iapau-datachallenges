@@ -41,6 +41,11 @@ export const POST: RequestHandler = async ({ request }) => {
   try {
     await client.connect();
     const { name,begin_date,end_date } = await request.json();
+    if(!name||!begin_date||!end_date){
+      throw error(400, {
+        message: 'One or more attribute is undefined'
+      });
+    }
     console.log("INSERT INTO data_challenge (name,begin_date,end_date) VALUES('"+name+"','TO_DATE('"+begin_date+"', 'DD-MM-YYYY'),TO_DATE('"+end_date+"', 'DD-MM-YYYY'));");
     const result = await client.query("INSERT INTO data_challenge (name,begin_date,end_date) VALUES('"+name+"',TO_DATE('"+begin_date+"', 'DD-MM-YYYY'),TO_DATE('"+end_date+"', 'DD-MM-YYYY'));");
 

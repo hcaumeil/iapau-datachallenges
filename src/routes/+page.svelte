@@ -36,24 +36,27 @@
   };
 </script>
 
-<div class="column-center" style="height: 100%">
+<div
+  class="column-center"
+  style="height: 100%; background-image: url(/img/ossau.jpg);background-size: cover;"
+>
   <iapau-card class="column-center card">
     <img
       src="img/iapau_round.png"
       alt="logo"
-      style="width: 30%; margin: 1rem;"
+      style="height: 15vh; margin: 1rem;"
     />
     <p style="font-size: 2rem;">Bienvenue</p>
     <p style="font-size: 1rem; font-weight: 300;">
       Connectez vous à l'aide de votre compte IA Pau
     </p>
     <iapau-input
-      on:input={handleEmailInput}
+      oninput={(e) => (email = e)}
       typeInput="text"
       placeholder="E-mail"
     />
     <iapau-input
-      on:input={handlePasswordInput}
+      oninput={(e) => (password = e)}
       typeInput="password"
       placeholder="Mot de passe"
     />
@@ -84,6 +87,8 @@
 
   iapau-input {
     width: 75%;
+    min-width: 350px;
     margin-top: 0.875rem;
+    display: flex;
   }
 </style>

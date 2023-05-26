@@ -40,10 +40,16 @@ try {
 export const POST: RequestHandler = async ({ request }) => {
   try {
     await client.connect();
-    const { email,surname,name,password,study_level,town,school,role } = await request.json();
+    const { email,surname,name,password,study_level,town,school } = await request.json();
+    if(!email||!surname||!name||!password||!study_level||!town||!school){
+      throw error(400, {
+        message: 'One or more attribute is undefined'
+      });
+    }
     const checkEmailQuery = `SELECT COUNT(*) FROM users WHERE email = '${email}';`;
     const emailResult = await client.query(checkEmailQuery);
     const emailCount = emailResult.rows[0].count;
+    const role = "user";
     if (emailCount > 0) {
       return new Response(JSON.stringify({
         message: 'Email already taken',

@@ -9,7 +9,5 @@ CREATE TABLE IF NOT EXISTS users (
     study_level TEXT,
     town TEXT,
     school TEXT,
-    role TEXT,
-    id_team UUID,
-    FOREIGN KEY (id_team) REFERENCES team (id)
+    role TEXT
 );

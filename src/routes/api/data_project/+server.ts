@@ -40,9 +40,9 @@ export const GET: RequestHandler = async () => {
 export const POST: RequestHandler = async ({ request }) => {
   try {
     await client.connect();
-    const { name, description, contact, ressources } = await request.json();
+    const { name, description, image, contact, ressources } = await request.json();
 
-    const result = await client.query("INSERT INTO data_project (name, description, contact, ressources) VALUES ($1, $2, $3, $4)", [name, description, contact, ressources]);
+    const result = await client.query("INSERT INTO data_project (name, description, image, contact, ressources) VALUES ($1, $2, $3, $4, $5)", [name, description, image, contact, ressources]);
 
 
     if(result.rowCount>0){

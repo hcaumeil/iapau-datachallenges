@@ -12,7 +12,8 @@
 	"dependencies": {
 		"iapau-components": "git+git@github.com:hcaumeil/iapau-components.git",
 		"pg": "^8.11.0",
-		"postgres": "^3.3.4"
+		"postgres": "^3.3.4",
+		"remixicon": "^3.3.0"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",

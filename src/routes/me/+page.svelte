@@ -3,48 +3,93 @@
     import "iapau-components/iapau-input";
     import "iapau-components/iapau-button";
     import "iapau-components/iapau-select";
-    import "iapau-components/iapau-elementnavbar";
     import "iapau-components/iapau-link";
     import ElementNavBar from "$lib/ElementNavBar.svelte";
+    import buttonMenu from "remixicon/icons/System/menu-line.svg"
+    import settings from "remixicon/icons/System/settings-3-line.svg"
+    import message from "remixicon/icons/Communication/message-3-line.svg"
+    import home from "remixicon/icons/Buildings/home-wifi-line.svg"
+    import dataP from "remixicon/icons/Development/code-s-slash-fill.svg"
+    import dataC from "remixicon/icons/Business/stack-line.svg"
 
+    let showMenu = true
 
+    function menu() {
+        showMenu = !showMenu
+    }
 </script>
 
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 
-<!-- test nev bar -->
-<div class="navbar">
+<div class="navbar" style="display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;">
 
-    <span class="material-symbols-outlined" style="cursor: pointer ">menu</span>
+    <img src="{buttonMenu}" on:click={menu} style="width:20px; left: 0;cursor: pointer; " alt="test">
 
-    <!-- manque remixicon
-    <img src="remixicon/icons/Business/mail-fill.svg" alt="test"> -->
-
-    <div style="margin-top: 15%" class="column-center">
+    <div class="column-center">
 
 
 
 
-        <ElementNavBar showMenu>
-            <img src="https://cdn-icons-png.flaticon.com/512/4436/4436481.png"
+        <ElementNavBar showMenu={showMenu}>
+            <img src="{home}"
                  slot="icon"
                  style="width: 1vw"
                  alt="Icon"/>
 
 
             <span slot="title" style="width: 1vw">
-                test
-            </span>
+               Accueil
+           </span>
 
         </ElementNavBar>
 
+        <ElementNavBar showMenu={showMenu}>
+            <img src="{dataC}"
+                 slot="icon"
+                 style="width: 1vw"
+                 alt="Icon"/>
+
+
+            <span slot="title" style="width: 1vw">
+               Data Challenge
+           </span>
+
+        </ElementNavBar>
+
+        <ElementNavBar showMenu={showMenu}>
+            <img src="{dataP}"
+                 slot="icon"
+                 style="width: 1vw"
+                 alt="Icon"/>
+
+
+            <span slot="title" style="width: 1vw">
+               Data project
+           </span>
+
+        </ElementNavBar>
+
+        <ElementNavBar showMenu={showMenu}>
+            <img src="{message}"
+                 slot="icon"
+                 style="width: 1vw"
+                 alt="Icon"/>
+
+
+            <span slot="title" style="width: 1vw">
+               Messagerie
+           </span>
+
+        </ElementNavBar>
 
     </div>
 
-    <span class="material-symbols-outlined" style="position: absolute; bottom: 0;margin-bottom: 15%"><a class="link"
-                                                                                                        href="/settings">Settings</a></span>
 
+
+
+    <img src="{settings}" alt="" style="width:24px">
 </div>
 
 
@@ -53,12 +98,10 @@
     .navbar {
         position: absolute;
         top: 0;
-        left: 0;
-        background-color: grey;
-        padding: 0 2.5% 0 2.5%;
+        box-shadow: 0px 10px 40px 0px rgba(0,0,0,0.32);
         height: 100%;
         width: fit-content;
+        padding: 0 2.5% 0 2.5%;
     }
-
 
 </style>

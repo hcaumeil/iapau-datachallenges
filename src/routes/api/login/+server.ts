@@ -8,6 +8,7 @@ import {
 } from "$env/static/private";
 import type { RequestHandler } from "@sveltejs/kit";
 import { error } from "@sveltejs/kit";
+import { sha256 } from "js-sha256";
 
 const dbConfig = {
   user: PG_USER,
@@ -18,18 +19,21 @@ const dbConfig = {
 };
 
 const client = new Client(dbConfig);
+await client.connect();
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    await client.connect();
     const { password, login } = await request.json();
 
     const result = await client.query(
-      "SELECT password FROM users WHERE email = '" + login + "';",
+      "SELECT password,salt FROM users WHERE email = '" + login + "';",
     );
 
     console.log(result);
-    if (result.rowCount > 0 && result.rows[0].password == password) {
+    if (
+      result.rowCount > 0 &&
+      sha256(password + result.rows[0].salt) == result.rows[0].password
+    ) {
       return new Response(JSON.stringify({
         valid: true,
       }));
@@ -43,9 +47,6 @@ export const POST: RequestHandler = async ({ request }) => {
     throw error(500, {
       message: error,
     });
-    // return new Response(JSON.stringify({error: "Internal Server Error"}), { status: 500 });
-  } finally {
-    await client.end();
   }
 };
 

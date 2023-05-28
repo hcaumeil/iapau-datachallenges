@@ -73,13 +73,13 @@ export const POST: RequestHandler = async ({ request }) => {
         message: "Email already taken",
       }));
     }
-    const sel = generateRandomString(16);
-    const hashed_password = sha256(password);
+    const salt = generateRandomString(16);
+    const hashed_password = sha256(password+salt);
     const role = "user";
     const result = await client.query(
       "INSERT INTO users (email,surname,name,password,salt,level,study_level,town,school,role) VALUES('" +
         email + "','" + surname + "','" + name + "','" + hashed_password +
-        "','" + sel + "',0,'" + study_level + "','" + town + "','" + school +
+        "','" + salt + "',0,'" + study_level + "','" + town + "','" + school +
         "','" + role + "');",
     );
 

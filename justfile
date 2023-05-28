@@ -15,4 +15,4 @@ update:
 	npm update iapau-components
 
 db:
-	psql -d iapau -U iapau -a -f migrations iapau.sql
+	psql -d iapau -U iapau -a -f migrations/iapau.sql

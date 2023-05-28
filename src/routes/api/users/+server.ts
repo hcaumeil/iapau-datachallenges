@@ -53,7 +53,6 @@ export const GET: RequestHandler = async ({ request }) => {
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
-    await client.connect();
     const { email, surname, name, password, study_level, town, school } =
       await request.json();
     if (
@@ -97,8 +96,6 @@ export const POST: RequestHandler = async ({ request }) => {
     return new Response(JSON.stringify({
       error: "Internal Server Error",
     }));
-  } finally {
-    await client.end();
   }
 };
 

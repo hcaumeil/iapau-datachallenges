@@ -11,22 +11,30 @@
   let email;
   let password;
 
+  let name;
+  let surname;
+  let town;
+
+  let school = "";
+  let study_level = "";
+
   let email_error = false;
   let fields_error = false;
-
-  // surname,name,password,study_level,town,school
 
   let cursor = 0;
 
   function prev() {
+    const items = document.querySelector("#slider")?.children;
     if (cursor != 0) {
       items[cursor].classList.remove("current");
       cursor--;
       items[cursor].classList.add("current");
+
+      fields_error = false;
     }
   }
 
-  function next() {
+  async function next() {
     const items = document.querySelector("#slider")?.children;
 
     if (cursor == 0) {
@@ -44,9 +52,37 @@
       }
     }
 
+    if (cursor == 1) {
+      if (!name || !surname || !town) {
+        fields_error = true;
+        return;
+      }
+    }
+
     fields_error = false;
 
     if (cursor + 1 == items?.length) {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          email,
+          password,
+          surname,
+          name,
+          town,
+          school,
+          study_level,
+        }),
+      });
+
+      if (response.ok) {
+        window.location.href = "/me";
+      }
+      console.log("dda");
     } else {
       items[cursor].classList.remove("current");
       cursor++;
@@ -93,14 +129,47 @@
         />
       </div>
       <div class="element">
-        <iapau-input typeInput="text" placeholder="Pseudo" />
-        <iapau-select id="mySelect" {options} />
-        <iapau-input typeInput="text" placeholder="Ecole" />
+        <iapau-input
+          typeInput="text"
+          placeholder="Nom"
+          oninput={(e) => (surname = e)}
+        />
+        <iapau-input
+          typeInput="text"
+          placeholder="Prénom"
+          oninput={(e) => (name = e)}
+        />
+        <iapau-input
+          typeInput="text"
+          placeholder="Ville"
+          oninput={(e) => (town = e)}
+        />
+      </div>
+      <div class="element">
+        <iapau-input
+          typeInput="text"
+          placeholder="École"
+          oninput={(e) => (school = e)}
+        />
+        <iapau-select
+          label="Niveau d'étude"
+          oninput={(e) => (study_level = e)}
+          {options}
+        />
       </div>
     </div>
-    <iapau-button mode="primary" style="margin:5%" onClick={next}>
-      Continuer</iapau-button
+    <div
+      style="display: flex; justify-content: space-evenly; margin-top: 1rem;"
     >
+      {#if cursor != 0}
+        <iapau-button mode="primary" style="margin:5%" onClick={prev}>
+          Retour</iapau-button
+        >
+      {/if}
+      <iapau-button mode="primary" style="margin:5%" onClick={next}>
+        Continuer</iapau-button
+      >
+    </div>
   </iapau-card>
 </div>
 
@@ -110,7 +179,7 @@
     width: fit-content;
     padding: 1rem;
     margin: 1rem;
-    transition: all 1s ease;
+    transition: all 2s ease;
   }
 
   .element {

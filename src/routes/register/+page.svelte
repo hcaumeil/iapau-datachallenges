@@ -39,11 +39,13 @@
 
     if (cursor == 0) {
       if (email) {
-        const e_check = email_check();
+        const e_check = await email_check();
         if (!e_check) {
           email_error = true;
           return;
         }
+
+        email_error = false;
       }
 
       if (!email || !password) {
@@ -82,7 +84,6 @@
       if (response.ok) {
         window.location.href = "/me";
       }
-      console.log("dda");
     } else {
       items[cursor].classList.remove("current");
       cursor++;
@@ -113,6 +114,11 @@
     {#if fields_error}
       <p style="font-size: 0.875rem; font-weight: 300; color: red">
         Veuillez remplir tous les champs
+      </p>
+    {/if}
+    {#if email_error}
+      <p style="font-size: 0.875rem; font-weight: 300; color: red">
+        Ce mail est deja pris
       </p>
     {/if}
     <div id="slider" style="transition: inherit;">

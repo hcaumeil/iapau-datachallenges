@@ -1,18 +1,16 @@
 <script lang="ts">
   import "iapau-components/css/default-theme.css";
-  import {page} from "$app/stores";
+  import { page } from "$app/stores";
 
   const pages = [
-      ["Accueil", "/me"],
-      ["Register", "/register"],
-      ["Settings", "/settings"],
+    ["Accueil", "/me"],
+    ["Register", "/register"],
+    ["Settings", "/settings"],
   ];
 
   let current_page: string;
   $: current_page = $page.url.pathname;
-
 </script>
-
 
 <slot />
 
@@ -36,11 +34,19 @@
   }
 
   :global(.link) {
-      text-decoration: none;
-      text-decoration-skip-ink: auto;
-      color:inherit;
+    text-decoration: none;
+    text-decoration-skip-ink: auto;
+    color: inherit;
   }
 
+  :global(.parallax) {
+    min-height: 6rem;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
   @font-face {
     font-family: "Montserrat";

@@ -15,8 +15,4 @@ update:
 	npm update iapau-components
 
 db:
-	\ir data_challenge.sql
-	\ir subject.sql
-	\ir team.sql
-	\ir users.sql
-	\ir data_project.sql
+	psql -d iapau -U iapau -a -f migrations iapau.sql

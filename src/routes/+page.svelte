@@ -5,6 +5,7 @@
 
   let email = "";
   let password = "";
+  let error: boolean = false;
 
   const handleLogin = async () => {
     const response = await fetch("/api/login", {
@@ -22,16 +23,18 @@
       const data = await response.json();
       console.log(data);
     } else {
-      alert("test");
       const errorData = await response.json();
+      if (response.status == 401) {
+        error = true;
+      }
       console.error(errorData.error);
     }
   };
 </script>
 
 <div
-  class="column-center"
-  style="height: 100%; background-image: url(/img/ossau.jpg);background-size: cover;"
+  class="column-center paralax"
+  style="min-height: 100%; background-image: url(/img/ossau.jpg);background-size: cover;"
 >
   <iapau-card class="column-center card">
     <img
@@ -43,6 +46,13 @@
     <p style="font-size: 1rem; font-weight: 300;">
       Connectez vous à l'aide de votre compte IA Pau
     </p>
+    {#if error}
+    <p
+      style="font-size: 0.875rem; font-weight: 300; margin-top: 0.5rem; color:red"
+    >
+      Mauvais login ou mot de passe
+    </p>
+    {/if}
     <iapau-input
       oninput={(e) => (email = e)}
       typeInput="text"
@@ -54,8 +64,10 @@
       placeholder="Mot de passe"
     />
 
-    <div style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;">
-      <iapau-button on:click={handleLogin} mode="primary" hoverColors="true"
+    <div
+      style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;"
+    >
+      <iapau-button on:click={handleLogin} mode="primary"
         >Connexion</iapau-button
       >
       <iapau-button mode="secondary" hoverColors="true"

@@ -1,4 +1,5 @@
-import { Client } from 'pg';
+import pkg from 'pg';
+const { Client } = pkg;
 import {PG_USER,PG_HOST,PG_DATABASE,PG_PASSWORD,PG_PORT} from '$env/static/private';
 import type { RequestHandler } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';

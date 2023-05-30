@@ -15,6 +15,7 @@
     import DataProject from "$lib/DataProject.svelte";
     import DataChallenge from "$lib/DataChallenge.svelte";
     import Tchat from "$lib/Tchat.svelte";
+    import Team from "$lib/Team.svelte";
 
 
     let showMenu = true
@@ -34,8 +35,7 @@
 <div style="display: flex;height: 100%">
     <div class="navbar" style="display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    margin-right: 5%">
+    justify-content: space-around">
 
         <img src="{buttonMenu}" on:click={menu} style="width:20px; left: 0;cursor: pointer; " alt="test">
 
@@ -107,6 +107,21 @@
                 </ElementNavBar>
             </button>
 
+            <button on:click={() => selectButton('team')}>
+                <ElementNavBar showMenu={showMenu} on:click={() => selectButton('dataProject')}>
+                    <img src="{message}"
+                         slot="icon"
+                         style="width: 1.5vw"
+                         alt="Icon"/>
+
+
+                    <span slot="title" style="width: 1.5vw">
+               Mon Equipe
+           </span>
+
+                </ElementNavBar>
+            </button>
+
         </div>
         <div>
             <a href=".">
@@ -114,11 +129,8 @@
 
             <a href=".">
             <img src="{disconnect}" alt="" style="width:24px; float: right"></a>
-
-
         </div>
     </div>
-
 
     {#if selectedButton === 'dataProject'}
         <DataProject/>
@@ -126,7 +138,13 @@
         <DataChallenge/>
     {:else if selectedButton === 'tchat'}
         <Tchat/>
+    {:else if selectedButton === 'team'}
+        <Team/>
     {/if}
+
+
+
+
 
 
 </div>

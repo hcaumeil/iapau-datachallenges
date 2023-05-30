@@ -11,6 +11,7 @@
 
 
 <iapau-link href={src}>
+
     <div class="icon" style=" display: inline-block; vertical-align: middle">
         <slot name="icon" />
     </div>

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" xmlns="http://www.w3.org/1999/html">
     import "iapau-components/iapau-card";
     import "iapau-components/iapau-input";
     import "iapau-components/iapau-button";
@@ -11,85 +11,120 @@
     import home from "remixicon/icons/Buildings/home-wifi-line.svg"
     import dataP from "remixicon/icons/Development/code-s-slash-fill.svg"
     import dataC from "remixicon/icons/Business/stack-line.svg"
+    import DataProject from "$lib/DataProject.svelte";
+    import DataChallenge from "$lib/DataChallenge.svelte";
+    import Tchat from "$lib/Tchat.svelte";
 
     let showMenu = true
 
     function menu() {
         showMenu = !showMenu
     }
+
+    let selectedButton = '';
+
+    function selectButton(buttonName) {
+        selectedButton = buttonName;
+    }
+
 </script>
 
-
+<div style="display: flex">
 <div class="navbar" style="display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;">
+    justify-content: space-around">
 
     <img src="{buttonMenu}" on:click={menu} style="width:20px; left: 0;cursor: pointer; " alt="test">
 
-    <div class="column-center">
+    <div style="
+    display: flex;
+    flex-direction: column"
+    >
 
 
-
-
+        <button on:click={() => selectButton('')}>
         <ElementNavBar showMenu={showMenu}>
             <img src="{home}"
                  slot="icon"
-                 style="width: 1vw"
+                 style="width: 1.5vw"
                  alt="Icon"/>
 
 
-            <span slot="title" style="width: 1vw">
+            <span slot="title" style="width: 1.5vw">
                Accueil
            </span>
 
         </ElementNavBar>
+        </button>
 
+
+        <button on:click={() => selectButton('dataChallenge')}>
         <ElementNavBar showMenu={showMenu}>
             <img src="{dataC}"
                  slot="icon"
-                 style="width: 1vw"
+                 style="width: 1.5vw"
                  alt="Icon"/>
 
 
-            <span slot="title" style="width: 1vw">
+            <span slot="title" style="width: 1.5vw">
                Data Challenge
            </span>
 
         </ElementNavBar>
+        </button>
 
-        <ElementNavBar showMenu={showMenu}>
+        <button on:click={() => selectButton('dataProject')} >
+        <ElementNavBar showMenu={showMenu} on:click={() => selectButton('dataProject')}>
             <img src="{dataP}"
                  slot="icon"
-                 style="width: 1vw"
+                 style="width: 1.5vw"
                  alt="Icon"/>
 
 
-            <span slot="title" style="width: 1vw">
+            <span slot="title" style="width: 1.5vw">
                Data project
            </span>
 
         </ElementNavBar>
+        </button>
 
-        <ElementNavBar showMenu={showMenu}>
+
+        <button on:click={() => selectButton('tchat')}>
+        <ElementNavBar showMenu={showMenu} on:click={() => selectButton('dataProject')}>
             <img src="{message}"
                  slot="icon"
-                 style="width: 1vw"
+                 style="width: 1.5vw"
                  alt="Icon"/>
 
 
-            <span slot="title" style="width: 1vw">
+            <span slot="title" style="width: 1.5vw">
                Messagerie
            </span>
 
         </ElementNavBar>
+        </button>
 
     </div>
 
 
 
 
+
     <img src="{settings}" alt="" style="width:24px">
+</div>
+
+    <div style="margin-left: 500px">
+
+    {#if selectedButton === 'dataProject'}
+        <DataProject />
+    {:else if selectedButton === 'dataChallenge'}
+        <DataChallenge />
+    {:else if selectedButton === 'tchat'}
+        <Tchat />
+    {/if}
+    </div>
+
+
 </div>
 
 
@@ -102,6 +137,13 @@
         height: 100%;
         width: fit-content;
         padding: 0 2.5% 0 2.5%;
+    }
+
+    button{
+        border: none;
+        background: none;
+        padding: 0;
+        text-align: left;
     }
 
 </style>

@@ -22,6 +22,16 @@
     if (response.ok) {
       const data = await response.json();
       console.log(data);
+
+
+      const res = await fetch("/api/users", {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Basic " + data.token,
+        },
+      });
+
+      console.log(await res.json());
     } else {
       const errorData = await response.json();
       if (response.status == 401) {
@@ -47,11 +57,11 @@
       Connectez vous à l'aide de votre compte IA Pau
     </p>
     {#if error}
-    <p
-      style="font-size: 0.875rem; font-weight: 300; margin-top: 0.5rem; color:red"
-    >
-      Mauvais login ou mot de passe
-    </p>
+      <p
+        style="font-size: 0.875rem; font-weight: 300; margin-top: 0.5rem; color:red"
+      >
+        Mauvais login ou mot de passe
+      </p>
     {/if}
     <iapau-input
       oninput={(e) => (email = e)}

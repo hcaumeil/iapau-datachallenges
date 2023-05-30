@@ -1,4 +1,4 @@
-import pkg from 'pg';
+import pkg from "pg";
 const { Client } = pkg;
 import {
   PG_DATABASE,
@@ -10,6 +10,7 @@ import {
 import type { RequestHandler } from "@sveltejs/kit";
 import { error, json } from "@sveltejs/kit";
 import { sha256 } from "js-sha256";
+import { auth_all } from "../auth.js";
 
 const dbConfig = {
   user: PG_USER,
@@ -39,11 +40,19 @@ export const GET: RequestHandler = async ({ request }) => {
       } else {
         return json({ message: "Email can be taken" });
       }
-    }
-    const result = await client.query("SELECT * FROM users");
-    const usersJson = JSON.stringify(result.rows);
+    } else {
+      const auth = headers.get("Authorization").split(" ");
+      console.log(auth)
 
-    return new Response(usersJson);
+      if (auth[1]) {
+        auth_all(auth[1]);
+      }
+
+      const result = await client.query("SELECT * FROM users");
+      const usersJson = JSON.stringify(result.rows);
+
+      return new Response(usersJson);
+    }
   } catch (error) {
     console.error("Error fetching user table:", error);
     return new Response(JSON.stringify({
@@ -75,7 +84,7 @@ export const POST: RequestHandler = async ({ request }) => {
       }));
     }
     const salt = generateRandomString(16);
-    const hashed_password = sha256(password+salt);
+    const hashed_password = sha256(password + salt);
     const role = "user";
     const result = await client.query(
       "INSERT INTO users (email,surname,name,password,salt,level,study_level,town,school,role) VALUES('" +

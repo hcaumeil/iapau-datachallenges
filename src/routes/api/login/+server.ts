@@ -11,6 +11,7 @@ import {
 import type { RequestHandler } from "@sveltejs/kit";
 import { error } from "@sveltejs/kit";
 import { sha256 } from "js-sha256";
+import { token, root } from '../auth.js';
 
 const dbConfig = {
   user: PG_USER,
@@ -28,16 +29,16 @@ export const POST: RequestHandler = async ({ request }) => {
     const { password, login } = await request.json();
 
     const result = await client.query(
-      "SELECT password,salt FROM users WHERE email = '" + login + "';",
+      "SELECT password,salt,email FROM users WHERE email = '" + login + "';",
     );
 
-    console.log(result);
     if (
       result.rowCount > 0 &&
       sha256(password + result.rows[0].salt) == result.rows[0].password
     ) {
       return new Response(JSON.stringify({
-        valid: true,
+        token: token(result.rows[0].email, "user"),
+        key: root.getPublicKey().toString()
       }));
     } else {
       return new Response(

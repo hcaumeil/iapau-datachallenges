@@ -16,6 +16,11 @@
     import DataChallenge from "$lib/DataChallenge.svelte";
     import Tchat from "$lib/Tchat.svelte";
     import Team from "$lib/Team.svelte";
+    import AddDataChallenge from "$lib/AddDataChallenge.svelte";
+    import DataBattle from "$lib/DataBattle.svelte";
+    import MyDataBattle from "$lib/MyDataBattle.svelte";
+    import Acceuil from "$lib/Acceuil.svelte";
+    import CodeAnalyse from "$lib/CodeAnalyse.svelte";
 
 
     let showMenu = true
@@ -45,7 +50,7 @@
         >
 
 
-            <button on:click={() => selectButton('')}>
+                <button on:click={() => selectButton('accueil')}>
                 <ElementNavBar showMenu={showMenu}>
                     <img src="{home}"
                          slot="icon"
@@ -77,7 +82,7 @@
             </button>
 
             <button on:click={() => selectButton('dataProject')}>
-                <ElementNavBar showMenu={showMenu} on:click={() => selectButton('dataProject')}>
+                <ElementNavBar showMenu={showMenu}>
                     <img src="{dataP}"
                          slot="icon"
                          style="width: 1.5vw"
@@ -93,7 +98,7 @@
 
 
             <button on:click={() => selectButton('tchat')}>
-                <ElementNavBar showMenu={showMenu} on:click={() => selectButton('dataProject')}>
+                <ElementNavBar showMenu={showMenu}>
                     <img src="{message}"
                          slot="icon"
                          style="width: 1.5vw"
@@ -108,7 +113,7 @@
             </button>
 
             <button on:click={() => selectButton('team')}>
-                <ElementNavBar showMenu={showMenu} on:click={() => selectButton('dataProject')}>
+                <ElementNavBar showMenu={showMenu}>
                     <img src="{message}"
                          slot="icon"
                          style="width: 1.5vw"
@@ -116,36 +121,107 @@
 
 
                     <span slot="title" style="width: 1.5vw">
-               Mon Equipe
+               Mes equipes
            </span>
 
+                </ElementNavBar>
+            </button>
+
+            <button on:click={() => selectButton('addDataChallenge')}>
+                <ElementNavBar showMenu={showMenu}>
+                    <img src="{message}"
+                         slot="icon"
+                         style="width: 1.5vw"
+                         alt="Icon"/>
+
+
+                    <span slot="title" style="width: 1.5vw">
+               Ajouter Data Challenge
+           </span>
+
+                </ElementNavBar>
+            </button>
+
+            <button on:click={() => selectButton('dataBattle')}>
+                <ElementNavBar showMenu={showMenu}>
+                    <img src="{message}"
+                         slot="icon"
+                         style="width: 1.5vw"
+                         alt="Icon"/>
+
+
+                    <span slot="title" style="width: 1.5vw">
+               Data Battle
+           </span>
+                </ElementNavBar>
+            </button>
+
+            <button on:click={() => selectButton('mydatabattle')}>
+                <ElementNavBar showMenu={showMenu}>
+                    <img src="{message}"
+                         slot="icon"
+                         style="width: 1.5vw"
+                         alt="Icon"/>
+
+
+                    <span slot="title" style="width: 1.5vw">
+               Mes Data Battle
+           </span>
+                </ElementNavBar>
+            </button>
+
+            <button on:click={() => selectButton('codeanalyse')}>
+                <ElementNavBar showMenu={showMenu}>
+                    <img src="{message}"
+                         slot="icon"
+                         style="width: 1.5vw"
+                         alt="Icon"/>
+
+
+                    <span slot="title" style="width: 1.5vw">
+               Code Analyseur
+           </span>
                 </ElementNavBar>
             </button>
 
         </div>
         <div>
             <a href=".">
-            <img src="{settings}" alt="" style="width:24px"></a>
+                <img src="{settings}" alt="" style="width:24px"></a>
 
             <a href=".">
-            <img src="{disconnect}" alt="" style="width:24px; float: right"></a>
+                <img src="{disconnect}" alt="" style="width:24px; float: right"></a>
         </div>
     </div>
+
+    <div style="
+    width: 100%;
+    display: inline-flex">
+
 
     {#if selectedButton === 'dataProject'}
         <DataProject/>
     {:else if selectedButton === 'dataChallenge'}
         <DataChallenge/>
-    {:else if selectedButton === 'tchat'}
-        <Tchat/>
     {:else if selectedButton === 'team'}
         <Team/>
+    {:else if selectedButton === 'tchat'}
+        <Tchat/>
+    {:else if selectedButton === 'dataBattle'}
+        <DataBattle/>
+    {:else if selectedButton === 'mydatabattle'}
+        <MyDataBattle/>
+    {:else if selectedButton === 'accueil'}
+        <Acceuil/>
+    {:else if selectedButton === 'codeanalyse'}
+        <CodeAnalyse/>
+
+
+        <!--  {#if !authHeader.startsWith("Bearer "))} -->
+    {:else if selectedButton === 'addDataChallenge'}
+        <AddDataChallenge/>
     {/if}
-
-
-
-
-
+</div>
 
 </div>
 

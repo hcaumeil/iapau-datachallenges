@@ -2,13 +2,15 @@
   import "iapau-components/iapau-card";
   import "iapau-components/iapau-input";
   import "iapau-components/iapau-button";
+  import iapau_api from "./+layout.svelte"
+
 
   let email = "";
   let password = "";
   let error: boolean = false;
 
   const handleLogin = async () => {
-    const response = await fetch("/api/login", {
+    const response = await fetch(iapau_api+"/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +26,7 @@
       console.log(data);
 
 
-      const res = await fetch("/api/users", {
+      const res = await fetch(iapau_api+"/api/users", {
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Basic " + data.token,
@@ -78,7 +80,8 @@
       style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;"
     >
       <iapau-button on:click={handleLogin} mode="primary"
-      >Connexion</iapau-button>
+        ><a class="link" href="/me">Inscription</a></iapau-button
+      >
       <iapau-button mode="secondary" hoverColors="true"
         ><a class="link" href="/register">Inscription</a></iapau-button
       >

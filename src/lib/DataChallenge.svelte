@@ -7,6 +7,7 @@
 
 <div style="display: flex;flex-wrap: wrap; justify-content: space-around">
 
+    <!-- for each datachallenge -->
 <Card title="Data Challenge 1" href="/events">
     <p slot="content">
         Prochain festival, prochain Meetup ou prochain Data Challenge ? Tous les évènements à venir d’IA Pau sont par ici, et  n’attendent plus que vous !
@@ -57,5 +58,6 @@
 
 </div>
 <style>
+
 
 </style>

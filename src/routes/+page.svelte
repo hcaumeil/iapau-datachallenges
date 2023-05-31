@@ -9,7 +9,7 @@
   let error: boolean = false;
 
   const handleLogin = async () => {
-    const response = await fetch(iapau_api + "api/login", {
+    const response = await fetch(iapau_api + "/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@
       const data = await response.json();
       console.log(data);
 
-      const res = await fetch(iapau_api + "api/user", {
+      const res = await fetch(iapau_api + "/api/user", {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Basic " + data.token,

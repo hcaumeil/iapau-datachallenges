@@ -15,7 +15,7 @@
 
     async function getUsers() {
         try {
-            const response = await fetch(iapau_api + "api/user", {
+            const response = await fetch(iapau_api + "/api/user", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -44,7 +44,7 @@
 
 
         try {
-            const response = await fetch(iapau_api + "api/user", {
+            const response = await fetch(iapau_api + "/api/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

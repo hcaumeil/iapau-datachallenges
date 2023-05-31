@@ -66,7 +66,7 @@
     fields_error = false;
 
     if (cursor + 1 == items?.length) {
-      const response = await fetch(iapau_api + "api/user", {
+      const response = await fetch(iapau_api + "/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@
   }
 
   async function email_check(): boolean {
-    const response = await fetch(iapau_api+ "api/user", {
+    const response = await fetch(iapau_api+ "/api/user", {
       headers: {
         email: email,
       },

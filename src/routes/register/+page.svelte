@@ -6,6 +6,8 @@
   import "iapau-components/iapau-link";
   import ElementNavBar from "$lib/ElementNavBar.svelte";
 
+  import { iapau_api } from "../const";
+
   const options = ["Bac+1", "Bac+2", "Bac+3", "Bac+4", "Bac+5"];
 
   let email;
@@ -64,7 +66,7 @@
     fields_error = false;
 
     if (cursor + 1 == items?.length) {
-      const response = await fetch("/api/users", {
+      const response = await fetch(iapau_api + "api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,6 +80,7 @@
           town,
           school,
           study_level,
+          role: "user",
         }),
       });
 
@@ -92,7 +95,7 @@
   }
 
   async function email_check(): boolean {
-    const response = await fetch("/api/users", {
+    const response = await fetch(iapau_api+ "api/user", {
       headers: {
         email: email,
       },

@@ -1,9 +1,11 @@
 <script>
     import { onMount } from "svelte";
     import { iapau_api } from "../routes/const.js";
+    import edit from "remixicon/icons/Design/edit-box-line.svg"
 
     let users = [];
     let selectedRole = "";
+
 
     async function getUsers() {
         try {
@@ -16,13 +18,6 @@
 
             if (response.ok) {
                 users = await response.json();
-                users.forEach((user) => {
-                    user.roles = [
-                        { value: "admin", label: "admin" },
-                        { value: "user", label: "user" },
-                        { value: "gestionnaire", label: "gestionnaire" }
-                    ];
-                });
             } else {
                 console.error("Erreur lors de la récupération des utilisateurs");
             }
@@ -71,21 +66,29 @@
     <tbody>
     {#each users as user}
         <tr>
-            <td>{user.email}</td>
-            <td>{user.name}</td>
-            <td>{user.surname}</td>
-            <td>{user.level}</td>
-            <td>{user.school}</td>
-            <td>
-                <select oninput={(e) => (selectedRole = e)}>
-                    {#each user.roles as role}
-                        <option value={user.role}>{role.label}</option>
-                    {/each}
-                </select>
-            </td>
+            <td><input type="text" bind:value={user.email}/> </td>
+            <td><input type="text" bind:value={user.name}/> </td>
+            <td><input type="text" bind:value={user.surname}/> </td>
+            <td><input type="text" bind:value={user.level}/> </td>
+            <td><input type="text" bind:value={user.school}/> </td>
+            <td><input type="text" bind:value={user.role}/> </td>
         </tr>
     {/each}
+
     </tbody>
 </table>
 
-<button on:click={saveRoles}>Sauvegarder</button>
+<iapau-button on:click={saveRoles}>Sauvegarder</iapau-button>
+<iapau-button>Edit</iapau-button>
+
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    input{
+        pointer-events: none;
+    }
+</style>

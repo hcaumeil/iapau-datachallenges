@@ -76,7 +76,7 @@
 
     .card {
         height: fit-content;
-        width: fit-content;
+        width: 40%;
         padding: 1rem;
         margin: 1rem;
     }
@@ -86,6 +86,7 @@
         justify-content: space-around;
         align-items: flex-end;
         height: 200px;
+        width: 70%;
         background-color: #f0f0f0;
     }
 
@@ -93,6 +94,7 @@
         color: white;
         font-size: small;
         padding: 2%;
+        width: 15%;
     }
 
     .first-place {

@@ -1,5 +1,5 @@
 <script>
-    //import iapau_api from "../routes/+layout.svelte";
+    import { iapau_api } from "../routes/const.js";
 
 
     let name = '';
@@ -13,7 +13,7 @@
         };
 
         try {
-            const response = await fetch(iapau_api +'/api/data_challenge', {
+            const response = await fetch(iapau_api +'api/data_challenge', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

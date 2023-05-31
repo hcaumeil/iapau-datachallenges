@@ -11,7 +11,11 @@
     import home from "remixicon/icons/Buildings/home-wifi-line.svg"
     import dataP from "remixicon/icons/Development/code-s-slash-fill.svg"
     import dataC from "remixicon/icons/Business/stack-line.svg"
+    import team from "remixicon/icons/User & Faces/team-line.svg"
     import disconnect from "remixicon/icons/Arrows/contract-left-line.svg"
+    import DataB from "remixicon/icons/Communication/questionnaire-line.svg"
+    import MyDataB from "remixicon/icons/Communication/questionnaire-fill.svg"
+    import analyse from "remixicon/icons/Editor/link.svg"
     import DataProject from "$lib/DataProject.svelte";
     import DataChallenge from "$lib/DataChallenge.svelte";
     import Tchat from "$lib/Tchat.svelte";
@@ -21,6 +25,7 @@
     import MyDataBattle from "$lib/MyDataBattle.svelte";
     import Acceuil from "$lib/Acceuil.svelte";
     import CodeAnalyse from "$lib/CodeAnalyse.svelte";
+    import TableUsers from "$lib/TableUsers.svelte";
 
 
     let showMenu = true
@@ -114,7 +119,7 @@
 
             <button on:click={() => selectButton('team')}>
                 <ElementNavBar showMenu={showMenu}>
-                    <img src="{message}"
+                    <img src="{team}"
                          slot="icon"
                          style="width: 1.5vw"
                          alt="Icon"/>
@@ -144,7 +149,7 @@
 
             <button on:click={() => selectButton('dataBattle')}>
                 <ElementNavBar showMenu={showMenu}>
-                    <img src="{message}"
+                    <img src="{DataB}"
                          slot="icon"
                          style="width: 1.5vw"
                          alt="Icon"/>
@@ -158,7 +163,7 @@
 
             <button on:click={() => selectButton('mydatabattle')}>
                 <ElementNavBar showMenu={showMenu}>
-                    <img src="{message}"
+                    <img src="{MyDataB}"
                          slot="icon"
                          style="width: 1.5vw"
                          alt="Icon"/>
@@ -172,7 +177,7 @@
 
             <button on:click={() => selectButton('codeanalyse')}>
                 <ElementNavBar showMenu={showMenu}>
-                    <img src="{message}"
+                    <img src="{analyse}"
                          slot="icon"
                          style="width: 1.5vw"
                          alt="Icon"/>
@@ -183,6 +188,23 @@
            </span>
                 </ElementNavBar>
             </button>
+
+
+            <button on:click={() => selectButton('users')}>
+                <ElementNavBar showMenu={showMenu}>
+                    <img src="{dataP}"
+                         slot="icon"
+                         style="width: 1.5vw"
+                         alt="Icon"/>
+
+
+                    <span slot="title" style="width: 1.5vw">
+               Utilisateur
+           </span>
+
+                </ElementNavBar>
+            </button>
+
 
         </div>
         <div>
@@ -195,8 +217,7 @@
     </div>
 
     <div style="
-    width: 100%;
-    display: inline-flex">
+    width: 100%">
 
 
     {#if selectedButton === 'dataProject'}
@@ -215,6 +236,8 @@
         <Acceuil/>
     {:else if selectedButton === 'codeanalyse'}
         <CodeAnalyse/>
+    {:else if selectedButton === 'users'}
+        <TableUsers/>
 
 
         <!--  {#if !authHeader.startsWith("Bearer "))} -->

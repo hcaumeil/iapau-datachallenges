@@ -81,7 +81,7 @@
         >Connexion</iapau-button
       >
       <iapau-button mode="secondary" hoverColors="true"
-        ><a class="link" href="/register">Inscription</a></iapau-button
+        ><a class="link" href="register">Inscription</a></iapau-button
       >
     </div>
   </iapau-card>

@@ -46,7 +46,7 @@
 
 <div
   class="column-center paralax"
-  style="min-height: 100%; background-image: url(/img/ossau.jpg);background-size: cover;"
+  style="min-height: 100%; background-image: url(img/ossau.jpg);background-size: cover;"
 >
   <iapau-card class="column-center card">
     <img

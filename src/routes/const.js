@@ -1,1 +1,1 @@
-export const iapau_api = "/account"
+export const iapau_api = ""

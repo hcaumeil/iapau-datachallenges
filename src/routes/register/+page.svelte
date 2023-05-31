@@ -107,7 +107,7 @@
 
 <div
   class="column-center"
-  style="min-height: 100%; background-image: url(img/ossau.jpg);background-size: cover;"
+  style="min-height: 100%; background-image: url(../img/ossau.jpg);background-size: cover;"
 >
   <iapau-card class="column-center card">
     <p style="font-size: 2rem; margin-top: 1rem;">Inscription</p>

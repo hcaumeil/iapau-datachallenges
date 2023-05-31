@@ -80,7 +80,7 @@
       style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;"
     >
       <iapau-button on:click={handleLogin} mode="primary"
-        ><a class="link" href="/me">Inscription</a></iapau-button
+        >Connexion</iapau-button
       >
       <iapau-button mode="secondary" hoverColors="true"
         ><a class="link" href="/register">Inscription</a></iapau-button

@@ -4,7 +4,13 @@
     import edit from "remixicon/icons/Design/edit-box-line.svg"
 
     let users = [];
-    let selectedRole = "";
+
+    let name = '';
+    let email = '';
+    let surname = '';
+    let level = "";
+    let school = "";
+    let role = "";
 
 
     async function getUsers() {
@@ -27,13 +33,23 @@
     }
 
     async function saveRoles() {
+        const data = {
+            email: email,
+            name: name,
+            surname: surname,
+            level: level,
+            school: school,
+            role: role
+        };
+
+
         try {
             const response = await fetch(iapau_api + "api/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ role: selectedRole })
+                body: JSON.stringify(data)
             });
 
             if (response.ok) {
@@ -66,12 +82,12 @@
     <tbody>
     {#each users as user}
         <tr>
-            <td><input type="text" bind:value={user.email}/> </td>
-            <td><input type="text" bind:value={user.name}/> </td>
-            <td><input type="text" bind:value={user.surname}/> </td>
-            <td><input type="text" bind:value={user.level}/> </td>
-            <td><input type="text" bind:value={user.school}/> </td>
-            <td><input type="text" bind:value={user.role}/> </td>
+            <td><input type="text" value={user.email} oninput={(e) => (email = e)} /> </td>
+            <td><input type="text" value={user.name} oninput={(e) => (name = e)} /> </td>
+            <td><input type="text" value={user.surname} oninput={(e) => (surname = e)} /> </td>
+            <td><input type="text" value={user.level} oninput={(e) => (level = e)} /> </td>
+            <td><input type="text" value={user.school} oninput={(e) => (school = e)}/> </td>
+            <td><input type="text" value={user.role} oninput={(e) => (role = e)} /> </td>
         </tr>
     {/each}
 
@@ -89,6 +105,6 @@
     }
 
     input{
-        pointer-events: none;
+        pointer-events: auto;
     }
 </style>

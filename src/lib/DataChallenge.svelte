@@ -11,6 +11,7 @@
     import "iapau-components/iapau-button";
 
     let isOpen = false;
+    let isOpenAddDataP = false;
 
     let dataChallenges = [];
     let title = "";
@@ -19,6 +20,7 @@
     let editBeginDate = "";
     let editEndDate = "";
     let editDescription = "";
+    let nameSubject =""
 
 
     onMount(() => {
@@ -74,6 +76,34 @@
 
         let formattedDate = day + "-" + month + "-" + year;
         return formattedDate;
+    }
+
+
+    async function handleAddSubjectButtonClick(){
+        const data = {
+            id_data_challenge: selectedDataChallengeId,
+            name: nameSubject
+        }
+
+        try {
+            const response = await fetch(iapau_api +'/api/subject', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                console.log('Subject ajouté avec succès');
+            } else {
+                console.error("Erreur lors de l'ajout du Subject");
+            }
+        } catch (error) {
+            console.error('Erreur lors de la requête POST', error);
+        }
+
+
     }
 
     async function handleButtonClick() {
@@ -148,7 +178,7 @@
     <div style="display: flex; flex-wrap: wrap; justify-content: space-around">
 
         {#each dataChallenges as dataChallenge}
-            <Card title={dataChallenge.name} href="/events">
+            <Card title={dataChallenge.name} href="/events" dataCid={dataChallenge.id}>
 
                 <div style="display: flex; width: 100%; justify-content: space-around">
 
@@ -180,12 +210,21 @@
                                 src="{add}"
                                 style="width: 1vw"
                                 alt="Icon"
+                                on:click={() => {
+              isOpenAddDataP = true;
+              title = "Ajouter un Subject";
+              selectedDataChallengeId = dataChallenge.id;
+            }}
                         />
                     </div>
                 </div>
+
+
                 <p slot="description">{dataChallenge.description}</p>
                 <p slot="datebegin">{dataChallenge.begin_date.substring(0, 10)}</p>
                 <p slot="dateend">{dataChallenge.end_date.substring(0, 10)}</p>
+
+
 
             </Card>
         {/each}
@@ -229,19 +268,18 @@
         </iapau-modal>
 
 
-        <iapau-modal modalB={isOpen || null} title="{title}">
 
+
+
+        <iapau-modal modalB={isOpenAddDataP || null} title="{title}">
             <div style="text-align: center; justify-content: center; display: flex;">
                 <iapau-card class="column-center card">
 
-                    <iapau-input oninput={(e) => (editName = e)} typeInput="text" placeholder="nom du projet" > </iapau-input>
-                    <iapau-input oninput={(e) => (editBeginDate = e)} label="Date de debut :" typeInput="date" />
-                    <iapau-input oninput={(e) => (editEndDate = e)} label="Date de fin :" typeInput="date" />
-                    <iapau-textarea cols="70" placeholder="description" rows="6" style="margin-top: 3%" oninput={(e) => (editDescription = e)} />
+                    <iapau-input oninput={(e) => (nameSubject = e)} typeInput="text" placeholder="nom du projet" > </iapau-input>
 
 
                     <div style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;">
-                        <iapau-button mode="secondary" class="close-button" on:click={() => (isOpen = false)}>
+                        <iapau-button mode="secondary" class="close-button" on:click={() => (isOpenAddDataP = false)}>
                             Close
                         </iapau-button>
 
@@ -249,8 +287,8 @@
                                 mode="primary"
                                 hoverColors="true"
                                 on:click={() => {
-                handleButtonClick();
-                isOpen = false;
+                handleAddSubjectButtonClick();
+                isOpenAddDataP = false;
               }}>Ajouter
                         </iapau-button>
                     </div>
@@ -266,6 +304,7 @@
                 }
             </style>
         </iapau-modal>
+
 
     </div>
 </div>

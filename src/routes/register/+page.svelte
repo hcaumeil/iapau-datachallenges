@@ -85,7 +85,7 @@
       });
 
       if (response.ok) {
-        window.location.href = "me";
+        window.location.href = "../me";
       }
     } else {
       items[cursor].classList.remove("current");

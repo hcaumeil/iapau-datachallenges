@@ -63,7 +63,6 @@
         <div
                 style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;"
         >
-
             <iapau-button mode="primary" hoverColors="true" on:click={handleAddButtonClick}
             >Ajouter</iapau-button>
         </div>

@@ -32,6 +32,7 @@
       });
 
       console.log(await res.json());
+      window.location.href = "me";
     } else {
       const errorData = await response.json();
       if (response.status == 401) {

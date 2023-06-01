@@ -1,0 +1,3 @@
+import {writable} from "svelte/store";
+
+export let  token = writable("EowBCiIKCWFhQGFhLmNvbRgDIgkKBwgKEgMYgAgiCAoGCAYSAhgKEiQIABIgdQ4dqPnEXagXjV7cJ_tZ1fTrsNCTRSW-OVtFx4JUQiQaQAC_NI1m43OdLamn0-SyFCMieIxRraLUFUXAvZcz5_kSbDIvYw-hsTz5WYAWdHqcgNs--K8guuJjIH62vIPjWgwiIgogPAHS7MDzDMyYAOagpELHQ9iV8mQqvsP70ekvjaB9vmQ=");

@@ -3,6 +3,9 @@
   import "iapau-components/iapau-input";
   import "iapau-components/iapau-button";
   import { iapau_api } from "./const";
+  import {token} from "../token"
+
+
 
   let email = "";
   let password = "";
@@ -22,6 +25,7 @@
 
     if (response.ok) {
       const data = await response.json();
+      $token = data.token
       console.log(data);
 
       const res = await fetch(iapau_api + "/api/user", {
@@ -33,6 +37,8 @@
 
       console.log(await res.json());
       window.location.href = "me";
+      console.log(data.token)
+
     } else {
       const errorData = await response.json();
       if (response.status == 401) {

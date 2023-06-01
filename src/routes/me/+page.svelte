@@ -23,13 +23,11 @@
   import DataChallenge from "$lib/DataChallenge.svelte";
   import Tchat from "$lib/Tchat.svelte";
   import Team from "$lib/Team.svelte";
-  import AddDataChallenge from "$lib/AddDataChallenge.svelte";
   import DataBattle from "$lib/DataBattle.svelte";
   import MyDataBattle from "$lib/MyDataBattle.svelte";
   import Acceuil from "$lib/Acceuil.svelte";
   import CodeAnalyse from "$lib/CodeAnalyse.svelte";
   import TableUsers from "$lib/TableUsers.svelte";
-  import Modal from "$lib/component/Modal.svelte";
 
   let showMenu = false;
 
@@ -112,16 +110,6 @@
         </ElementNavBar>
       </button>
 
-      <button on:click={() => selectButton("addDataChallenge")}>
-        <ElementNavBar {showMenu}>
-          <img src={message} slot="icon" style="width: 1.5vw" alt="Icon" />
-
-          <span slot="title" style="width: 1.5vw">
-            Ajouter Data Challenge
-          </span>
-        </ElementNavBar>
-      </button>
-
       <button on:click={() => selectButton("dataBattle")}>
         <ElementNavBar {showMenu}>
           <img src={DataB} slot="icon" style="width: 1.5vw" alt="Icon" />
@@ -195,10 +183,6 @@
       <CodeAnalyse />
     {:else if selectedButton === "users"}
       <TableUsers />
-
-      <!-- {#if !authHeader.startsWith("Bearer "))}-->
-    {:else if selectedButton === "addDataChallenge"}
-      <AddDataChallenge />
     {/if}
   </div>
 </div>

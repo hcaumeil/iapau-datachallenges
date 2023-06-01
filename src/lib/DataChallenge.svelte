@@ -161,10 +161,10 @@
 <div>
     <div style="display: flex; width: 100%">
 
-        <h2 style="margin-top: 5%; margin-bottom: 3%">Data Challenge</h2>
+        <h2 style="margin-top: 5%; margin-bottom: 3%; width: 100%; text-align: center">Data Challenge</h2>
         <img
                 src="{add}"
-                style="width: 5vw"
+                style="width: 2vw; position: absolute; right: 5%; top :50px"
                 alt="Icon"
                 on:click={() => {
         isOpen = true;

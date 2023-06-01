@@ -1,7 +1,6 @@
 <script lang="ts">
     export let showMenu: boolean = true;
 
-    export let src: string = "/me"
 
 
 
@@ -10,7 +9,7 @@
 </script>
 
 
-<iapau-link href={src}>
+<div class="element">
 
     <div class="icon" style=" display: inline-block; vertical-align: middle">
         <slot name="icon" />
@@ -22,8 +21,12 @@
         </div>
     {/if}
 
-</iapau-link>
+</div>
 
 
 <style>
+
+    .element:hover{
+        color: grey;
+    }
 </style>

@@ -5,6 +5,7 @@
   import "iapau-components/iapau-select";
   import "iapau-components/iapau-link";
   import "iapau-components/iapau-textarea";
+  import "iapau-components/iapau-modal"
   import buttonMenu from "remixicon/icons/System/menu-line.svg";
   import settings from "remixicon/icons/System/settings-3-line.svg";
   import message from "remixicon/icons/Communication/message-3-line.svg";
@@ -28,7 +29,7 @@
   import Acceuil from "$lib/Acceuil.svelte";
   import CodeAnalyse from "$lib/CodeAnalyse.svelte";
   import TableUsers from "$lib/TableUsers.svelte";
-  import EditData from "$lib/EditData.svelte";
+  import Modal from "$lib/component/Modal.svelte";
 
   let showMenu = false;
 
@@ -36,7 +37,7 @@
     showMenu = !showMenu;
   }
 
-  export let selectedButton = "accueil";
+  let selectedButton = "accueil";
 
   function selectButton(buttonName) {
     selectedButton = buttonName;
@@ -71,7 +72,6 @@
     display: flex;
     flex-direction: column; gap: 5px;"
     >
-
       <button on:click={() => selectButton("accueil")}>
         <ElementNavBar {showMenu}>
           <img src={home} slot="icon" style="width: 1.5vw" alt="Icon" />
@@ -194,9 +194,7 @@
     {:else if selectedButton === "codeanalyse"}
       <CodeAnalyse />
     {:else if selectedButton === "users"}
-      <TableUsers />
-    {:else if selectedButton === "editDataChallenge"}
-      <EditData />
+      <Modal />
 
       <!-- {#if !authHeader.startsWith("Bearer "))}-->
     {:else if selectedButton === "addDataChallenge"}

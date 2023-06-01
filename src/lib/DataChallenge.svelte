@@ -5,8 +5,15 @@
     import deleteD from "remixicon/icons/System/delete-bin-line.svg"
     import edit from "remixicon/icons/Design/edit-box-line.svg"
     import add from "remixicon/icons/System/add-line.svg"
+    import Modal from "$lib/component/Modal.svelte";
 
     let dataChallenges = []
+    let showModal = false
+    let test="test2"
+
+    function modal() {
+        showModal = !showModal;
+    }
 
     onMount(() => {
         getDataChallenge()
@@ -65,7 +72,9 @@
                 <div style="margin-left: 2%">
                     <img src="{edit}"
                          style="width: 1vw"
-                         alt="Icon" on:click={() => selectButton("editDataChallenge")}/>
+                         alt="Icon"
+                         on:click={modal}
+                    />
                     <img src="{deleteD}"
                          style="width: 1vw"
                          alt="Icon"
@@ -83,13 +92,14 @@
                 <p slot="dateend"> {dataChallenge.end_date.substring(0, 10)}</p>
 
             </Card>
-
         {/each}
 
 
     </div>
+    <Modal title="{test}" modalB="false"> </Modal>
 
 </div>
+
 <style>
 
 

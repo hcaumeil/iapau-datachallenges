@@ -71,7 +71,7 @@
         }
     }
 
-    async function handleButtonClick(){
+    async function handleAddTeam(){
         const data = {
             name: nameTeam,
             id_subject: selectedSubjectId,
@@ -141,7 +141,7 @@
             hoverColors="true"
             on:click={() => {
                 AddUsersTeam.push(User1,User2,User3);
-                handleButtonClick();
+                handleAddTeam();
                 isOpenAddTeam = false;
               }}>Ajouter
     </iapau-button>

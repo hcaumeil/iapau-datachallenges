@@ -1,5 +1,7 @@
 <script>
 import TeamMember from "$lib/component/TeamMember.svelte";
+
+
 </script>
 
 

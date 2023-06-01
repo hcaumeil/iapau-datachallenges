@@ -4,7 +4,7 @@
   import "iapau-components/iapau-button";
   import "iapau-components/iapau-select";
   import "iapau-components/iapau-link";
-
+  import "iapau-components/iapau-textarea";
   import buttonMenu from "remixicon/icons/System/menu-line.svg";
   import settings from "remixicon/icons/System/settings-3-line.svg";
   import message from "remixicon/icons/Communication/message-3-line.svg";
@@ -15,7 +15,6 @@
   import disconnect from "remixicon/icons/Arrows/contract-left-line.svg";
   import analyse from "remixicon/icons/Editor/link.svg";
   import close from "remixicon/icons/System/close-line.svg";
-
   import ElementNavBar from "$lib/ElementNavBar.svelte";
   import DataB from "remixicon/icons/Communication/questionnaire-line.svg";
   import MyDataB from "remixicon/icons/Communication/questionnaire-fill.svg";
@@ -29,6 +28,7 @@
   import Acceuil from "$lib/Acceuil.svelte";
   import CodeAnalyse from "$lib/CodeAnalyse.svelte";
   import TableUsers from "$lib/TableUsers.svelte";
+  import EditData from "$lib/EditData.svelte";
 
   let showMenu = false;
 
@@ -36,7 +36,7 @@
     showMenu = !showMenu;
   }
 
-  let selectedButton = "";
+  export let selectedButton = "accueil";
 
   function selectButton(buttonName) {
     selectedButton = buttonName;
@@ -71,6 +71,7 @@
     display: flex;
     flex-direction: column; gap: 5px;"
     >
+
       <button on:click={() => selectButton("accueil")}>
         <ElementNavBar {showMenu}>
           <img src={home} slot="icon" style="width: 1.5vw" alt="Icon" />
@@ -194,8 +195,10 @@
       <CodeAnalyse />
     {:else if selectedButton === "users"}
       <TableUsers />
+    {:else if selectedButton === "editDataChallenge"}
+      <EditData />
 
-      <!--  {#if !authHeader.startsWith("Bearer "))} -->
+      <!-- {#if !authHeader.startsWith("Bearer "))}-->
     {:else if selectedButton === "addDataChallenge"}
       <AddDataChallenge />
     {/if}

@@ -3,15 +3,20 @@
     import { iapau_api } from "../routes/const.js";
     import edit from "remixicon/icons/Design/edit-box-line.svg"
 
-    let users = [];
+    let datas = [];
+    let users = []
 
-    let name = '';
-    let email = '';
-    let surname = '';
-    let level = "";
-    let school = "";
-    let role = "";
+    onMount(() => {
+        getUsers()
+    })
 
+    function updateKey(userId,key,value) {
+        for (const u of users) {
+            if (u.id === userId){
+                u[key] = value
+            }
+        }
+    }
 
     async function getUsers() {
         try {
@@ -32,39 +37,31 @@
         }
     }
 
-    async function saveRoles() {
-        const data = {
-            email: email,
-            name: name,
-            surname: surname,
-            level: level,
-            school: school,
-            role: role
-        };
 
+    async function updateUser (userId) {
+        const found = users.find( (e) => e.id === userId);
 
         try {
-            const response = await fetch(iapau_api + "/api/user", {
+            const response = await fetch(iapau_api + "/api/user/" + userId, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(found)
             });
 
             if (response.ok) {
-                console.log("Rôle sauvegardé avec succès");
+               getUsers()
+                console.log("Upadate sauvegardé avec succès");
             } else {
-                console.error("Erreur lors de la sauvegarde du rôle");
+                console.error("Erreur lors de la sauvegarde de l'update");
             }
         } catch (error) {
             console.error("Erreur lors de la requête POST", error);
         }
     }
 
-    onMount(() => {
-        getUsers();
-    });
+
 </script>
 
 <h2 style="text-align: center">Liste des utilisateurs</h2>
@@ -77,25 +74,24 @@
         <td>level</td>
         <td>school</td>
         <td>role</td>
+        <td>action</td>
     </tr>
     </thead>
     <tbody>
     {#each users as user}
         <tr>
-            <td><input type="text" value={user.email} oninput={(e) => (email = e)} /> </td>
-            <td><input type="text" value={user.name} oninput={(e) => (name = e)} /> </td>
-            <td><input type="text" value={user.surname} oninput={(e) => (surname = e)} /> </td>
-            <td><input type="text" value={user.level} oninput={(e) => (level = e)} /> </td>
-            <td><input type="text" value={user.school} oninput={(e) => (school = e)}/> </td>
-            <td><input type="text" value={user.role} oninput={(e) => (role = e)} /> </td>
+            <td><input type="text" value={user.email} on:input={(e) => (updateKey(user.id,"email",e.target.value))} /></td>
+            <td><input type="text" value={user.name} on:input={(e) => (updateKey(user.id,"name",e.target.value))} /></td>
+            <td><input type="text" value={user.surname} on:input={(e) => (updateKey(user.id,"surname",e.target.value))} /></td>
+            <td><input type="text" value={user.level} on:input={(e) => (updateKey(user.id,"level",e.target.value))} /></td>
+            <td><input type="text" value={user.school} on:input={(e) => (updateKey(user.id,"school",e.target.value))} /></td>
+            <td><input type="text" value={user.role} on:input={(e) => (updateKey(user.id,"role",e.target.value))} /></td>
+            <td><button on:click={() => updateUser(user.id)}>Edit</button></td>
         </tr>
     {/each}
 
     </tbody>
 </table>
-
-<iapau-button on:click={saveRoles}>Sauvegarder</iapau-button>
-<iapau-button>Edit</iapau-button>
 
 
 <style>

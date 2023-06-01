@@ -28,6 +28,27 @@
         }
     }
 
+
+    async function getTeam(subjectId) {
+        try {
+            const response = await fetch(iapau_api + "/api/team?data_challenge_id=" + subjectId, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                subjects = await response.json();
+                filteredSubjects = subjects.filter((subject) => subject.id_data_challenge === dataChallengeId);
+            } else {
+                console.error("Erreur lors de la récupération des utilisateurs");
+            }
+        } catch (error) {
+            console.error("Erreur lors de la requête GET", error);
+        }
+    }
+
 </script>
 
 <iapau-card
@@ -35,7 +56,8 @@
         hoverUpAnimation="true" hoverBorder="true"
 
 >
-    <!-- user == admin -->
+
+
     <div style="text-align: center;" class="column-center">
         <slot/>
         <h3>{title}</h3>
@@ -63,6 +85,7 @@
             <h2> {filteredSubject.name}</h2>
 
             <iapau-button> Ajouter </iapau-button>
+            <iapau-button mode="secondary"> Voir Equipe </iapau-button>
 
 
         </iapau-card>
@@ -85,3 +108,4 @@
         }
     </style>
 </iapau-modal>
+

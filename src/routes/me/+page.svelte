@@ -194,7 +194,7 @@
     {:else if selectedButton === "codeanalyse"}
       <CodeAnalyse />
     {:else if selectedButton === "users"}
-      <Modal />
+      <TableUsers />
 
       <!-- {#if !authHeader.startsWith("Bearer "))}-->
     {:else if selectedButton === "addDataChallenge"}

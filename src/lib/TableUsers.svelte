@@ -62,10 +62,12 @@
     }
 
 
+
+
 </script>
 
 <h2 style="text-align: center">Liste des utilisateurs</h2>
-<table style="width: 90%; margin: 5%">
+<table style="width: 90%; margin: 2%">
     <thead>
     <tr>
         <td>email</td>

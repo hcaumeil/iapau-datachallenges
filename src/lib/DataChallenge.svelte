@@ -231,8 +231,7 @@
 
         <iapau-modal modalB={isOpen || null} title="{title}">
 
-            <div style="text-align: center; justify-content: center; display: flex;">
-                <iapau-card class="column-center card">
+            <div style="text-align: center; justify-content: center; display: flex;" class="column-center">
 
                     <iapau-input oninput={(e) => (editName = e)} typeInput="text" placeholder="nom du projet" > </iapau-input>
                     <iapau-input oninput={(e) => (editBeginDate = e)} label="Date de debut :" typeInput="date" />
@@ -254,7 +253,6 @@
               }}>Ajouter
                         </iapau-button>
                     </div>
-                </iapau-card>
             </div>
 
             <style>

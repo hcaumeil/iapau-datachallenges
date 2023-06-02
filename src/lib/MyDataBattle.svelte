@@ -3,7 +3,7 @@
 </script>
 
 <div>
-<h2 style="text-align: center;margin-bottom: 3%; margin-top: 5%"> Mes datas Challenge</h2>
+<h2 style="text-align: center;margin-bottom: 3%; margin-top: 3%"> Mes datas Challenge</h2>
 
 <div style="display: flex;
     flex-wrap: wrap;
@@ -29,11 +29,11 @@
     </iapau-card>
 
     <iapau-card class="column-center card">
-        <h2> Nom data Battle</h2>
+        <h2> The Data Analytics Showdown</h2>
         <div class="podium">
-            <div class="first-place">1st Place</div>
-            <div class="second-place">2nd Place</div>
-            <div class="third-place">3rd Place</div>
+            <div class="first-place">Thunderbolt</div>
+            <div class="second-place">Phoenix Rising</div>
+            <div class="third-place">Velocity Vipers</div>
         </div>
 
 
@@ -50,11 +50,11 @@
 
 
     <iapau-card class="column-center card">
-        <h2> Nom data Battle</h2>
+        <h2> The Algorithm Wars</h2>
         <div class="podium">
-            <div class="first-place">Nom team 1</div>
-            <div class="second-place">Nom team 2</div>
-            <div class="third-place">Nom team 3</div>
+            <div class="first-place">Spectral Savages</div>
+            <div class="second-place">Quantum Force</div>
+            <div class="third-place">Cyber Sharks</div>
         </div>
 
 

@@ -5,6 +5,7 @@
     <div style="display: flex; justify-content: space-around">
     <p> <slot name="nom"></slot> </p>
 
+
     <iapau-button mode="seconday">Supprimer</iapau-button>
     </div>
 

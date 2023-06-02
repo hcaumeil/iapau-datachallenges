@@ -1,26 +1,28 @@
 <script lang="ts">
     export let title: string = "";
     import {iapau_api} from "../../routes/const.js"
-    import {token} from  "../../token"
-    export let dataCid: string ="";
+    import {token} from "../../token"
 
-    let isOpenSubject =false;
+    export let dataCid: string = "";
+
+    let isOpenSubject = false;
     let isOpenAddTeam = false
-    let subjects =[]
+    let subjects = []
     let filteredSubjects = []
     let teams = []
     let filteredTeams = []
-    let AddUsersTeam  = []
-    let nameTeam =""
+    let AddUsersTeam = []
+    let nameTeam = ""
     let subjectId = ""
     let selectedSubjectId = null;
-    let User1 =""
-    let User2 =""
-    let User3 =""
+    let User1 = ""
+    let User2 = ""
+    let User3 = ""
+    let isOpenTeamView = false
 
     let tokenValue;
 
-    token.subscribe( value => {
+    token.subscribe(value => {
         tokenValue = value;
     })
 
@@ -71,7 +73,7 @@
         }
     }
 
-    async function handleAddTeam(){
+    async function handleAddTeam() {
         const data = {
             name: nameTeam,
             id_subject: selectedSubjectId,
@@ -79,7 +81,7 @@
         }
 
         try {
-            const response = await fetch(iapau_api +'/api/team', {
+            const response = await fetch(iapau_api + '/api/team', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,53 +122,69 @@
         </div>
     </div>
 
-    <iapau-button hoverColors size="sm" style="float: right; margin-right: 2%" on:click={() => {getSubject(dataCid); isOpenSubject=true}}>Participer
+    <iapau-button hoverColors size="sm" style="float: right; margin-right: 2%"
+                  on:click={() => {getSubject(dataCid); isOpenSubject=true}}>Participer
     </iapau-button>
 
     <iapau-button mode="secondary" hoverColors size="sm" style="float: right; margin-right: 2%">Info</iapau-button>
 </iapau-card>
 
 <iapau-modal modalB={isOpenAddTeam || null} title="Create Team">
-    <iapau-input oninput={(e) => (nameTeam = e)} typeInput="text" placeholder="nom de l'équipe" > </iapau-input>
-    <iapau-input oninput={(e) =>(User1 = e)} typeInput="text" placeholder="User1" > </iapau-input>
-    <iapau-input oninput={(e) =>(User2 = e)} typeInput="text" placeholder="User2" > </iapau-input>
-    <iapau-input oninput={(e) =>(User3 = e)} typeInput="text" placeholder="User3" > </iapau-input>
+    <iapau-input oninput={(e) => (nameTeam = e)} typeInput="text" placeholder="nom de l'équipe"></iapau-input>
+    <iapau-input oninput={(e) =>(User1 = e)} typeInput="text" placeholder="User1"></iapau-input>
+    <iapau-input oninput={(e) =>(User2 = e)} typeInput="text" placeholder="User2"></iapau-input>
+    <iapau-input oninput={(e) =>(User3 = e)} typeInput="text" placeholder="User3"></iapau-input>
 
-    <iapau-button mode="secondary" class="close-button" on:click={() => (isOpenAddTeam = false)}>
-        Close
-    </iapau-button>
+    <div style="display: flex; justify-content: space-around">
 
-    <iapau-button
-            mode="primary"
-            hoverColors="true"
-            on:click={() => {
+        <iapau-button mode="secondary" class="close-button" on:click={() => (isOpenAddTeam = false)}>
+            Close
+        </iapau-button>
+
+        <iapau-button
+                mode="primary"
+                hoverColors="true"
+                on:click={() => {
                 AddUsersTeam.push(User1,User2,User3);
                 handleAddTeam();
                 isOpenAddTeam = false;
               }}>Ajouter
-    </iapau-button>
+        </iapau-button>
+    </div>
 
+    <style>
+    </style>
 </iapau-modal>
 
 
 <iapau-modal modalB={isOpenSubject || null} title="Sujets">
-    <div style="text-align: center; justify-content: center; display: flex">
+    <div style="text-align: center; justify-content: center">
 
-        {#each filteredSubjects as filteredSubject}
+        <div style="display: flex">
 
-            <iapau-card class="column-center card">
+            {#each filteredSubjects as filteredSubject}
 
-                <h2> {filteredSubject.name}</h2>
+                <iapau-card class="column-center card">
 
-                <iapau-button on:click={() => {isOpenAddTeam=true; selectedSubjectId=filteredSubject.id; isOpenSubject=false }} > Ajouter </iapau-button>
-                <iapau-button mode="secondary" on:click={() => {getTeam(filteredSubject.id)}}> Voir Equipe </iapau-button>
+                    <h2> {filteredSubject.name}</h2>
+
+                    <iapau-button
+                            on:click={() => {isOpenAddTeam=true; selectedSubjectId=filteredSubject.id; isOpenSubject=false }}
+                            style="margin: 20px"> Ajouter
+                    </iapau-button>
+                    <iapau-button mode="secondary"
+                                  on:click={() => {getTeam(filteredSubject.id); isOpenTeamView=true; isOpenSubject =false}}>
+                        Voir Equipe
+                    </iapau-button>
 
 
-            </iapau-card>
+                </iapau-card>
 
-        {/each}
+            {/each}
 
-        <div style="display: flex; margin-top: 2rem; justify-content: space-evenly; width: 100%;">
+        </div>
+
+        <div style="margin-top: 2rem; justify-content: space-evenly; width: 100%;">
             <iapau-button mode="secondary" class="close-button" on:click={() => (isOpenSubject = false)}>
                 Close
             </iapau-button>
@@ -182,5 +200,54 @@
         }
     </style>
 
+</iapau-modal>
+
+
+<iapau-modal modalB={isOpenTeamView || null} title="Equipe Inscrite">
+    <div style="display: flex; justify-content: space-around">
+
+        {#each filteredTeams as filteredTeam}
+            <iapau-card>
+                <p> {filteredTeams.name}</p>
+
+                {#each filteredTeams.id_users as user}
+                    <p> user.name</p>
+                {/each}
+            </iapau-card>
+        {/each}
+
+        <!-- Pour tester -->
+        <iapau-card class="cardTeam">
+            <p> Data Wizards </p>
+            <p> Sarah</p>
+            <p> Thomas</p>
+            <p> Emily</p>
+            <p> Kevin</p>
+
+        </iapau-card>
+
+        <iapau-card class="cardTeam">
+            <p> Innovation Squad </p>
+            <p> Alex</p>
+            <p> Sophia</p>
+            <p> Liam</p>
+            <p> Ava</p>
+        </iapau-card>
+
+
+    </div>
+        <iapau-button mode="secondary" class="close-button" on:click={() => (isOpenTeamView = false)}>
+            Close
+        </iapau-button>
+
+
+
+    <style>
+
+        .cardTeam{
+            padding: 5%;
+            margin: 5%;
+        }
+    </style>
 </iapau-modal>
 
